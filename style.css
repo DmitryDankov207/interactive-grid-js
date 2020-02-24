@@ -1,0 +1,43 @@
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #466995;
+	margin: 0 auto;
+	height: 100px;
+	align-items: center;
+	width: 800px;
+	border-radius: 0% 0% 10px 10px;
+}
+
+.btn {
+	width: 200px;
+	height: 70px;
+	display: inline;
+	margin-left: 300px;
+	margin-top: 15px;
+}
+
+body {
+	background-color: #bbb;
+	align-items: center;
+}
+.grid {
+	margin: 0 auto;
+  	width: 750px;
+  	height: 750px;
+  	margin-top: 20px;
+  	align-items: center;
+}
+
+.box {
+  background-color: white;
+  display: inline-block;
+}
+
+.white {
+	background-color: white;
+}

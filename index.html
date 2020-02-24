@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel='stylesheet' type='text/css' href='style.css'>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  </head>
+  
+<body class="params">
+  <header>
+    <input type="submit" class="btn">
+  </header>
+  <content>
+    <div class="grid">
+  </div>
+  </content>
+  <script>
+    $(function() {
+      function fillGrid(count) {
+        if(count > 64) {
+          alert("size is too large!")
+          return
+        }
+          
+        $(".grid").empty()
+        for(let i = 0; i < count; i++) {
+          for(let j = 0; j < count; j++) {
+            let box = $("<div>", {
+              "class": "box",
+              "id": `${(i * count) + j}`,
+              width: Math.trunc($(".grid").width() / count),
+              height: Math.trunc($(".grid").height() / count)
+              })     
+            box.css("background-color", rgb_to_hex(get_rand_color()))
+            box.appendTo($(".grid"))     
+          }
+        }
+      }
+      
+      fillGrid(16)
+
+      $(".btn").click(function() {
+        let size = prompt('type size of grid:', 6)
+        fillGrid(size)
+      })
+
+      function rgb_to_hex(color){
+        var rgb = color.replace(/\s/g,'').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+        return (rgb && rgb.length === 4) ? "#" + ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : color;
+      }
+
+      function get_rand_color() {
+        return rgb_to_hex(`rgb(${get_random_byte()}, 
+          ${get_random_byte()}, ${get_random_byte()})`)
+      }
+
+      function get_random_byte() {
+        return Math.floor(Math.random() * 255)
+      }
+
+      $(".grid").on({ mouseenter: function() {
+          let strArr = $(this).css("background-color").split(',')
+          if(strArr.length === 3) {
+            for(i = 0; i < strArr.length; i++) {
+              strArr[i] = +/\d+/.exec(strArr[i])
+              strArr[i] -= 26
+            }
+            $(this).css("background-color", rgb_to_hex(`rgb(${strArr[0]}, ${strArr[1]}, ${strArr[2]})`))
+          }
+        }
+      }, ".box")
+    })
+  </script>
+
+  </body>
+
+</html>
